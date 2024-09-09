@@ -1,11 +1,10 @@
 'use client';
 
-import dynamic from 'next/dynamic';
+import Main from '@/components/layout/Main';
 import Banner from '@/components/layout/banner/banner';
 import Footer from '@/components/layout/footer/Footer';
 import Header from '@/components/layout/header/Header';
-import Main from '@/components/layout/Main';
-import Guide from './_components/Guide';
+import dynamic from 'next/dynamic';
 
 // Because the mint page relies so heavily on client-side state, without disabling SSR
 // for its internals we get annoying hydration errors. A future enhancement would be to
@@ -28,7 +27,6 @@ export default function MintPage() {
       <Main>
         <Banner pageName="Mint NFT" pageUrl="mint" />
         <MintContractDemo />
-        <Guide />
       </Main>
       <Footer />
     </>

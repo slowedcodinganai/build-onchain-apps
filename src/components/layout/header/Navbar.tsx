@@ -1,5 +1,12 @@
 import { ChevronDownIcon, GitHubLogoIcon } from '@radix-ui/react-icons';
-import * as NavigationMenu from '@radix-ui/react-navigation-menu';
+import {
+  Content,
+  Item,
+  List,
+  Root,
+  Trigger,
+  Viewport,
+} from '@radix-ui/react-navigation-menu';
 import { clsx } from 'clsx';
 import NextLink from 'next/link';
 import AccountConnect from './AccountConnect';
@@ -19,7 +26,7 @@ export function NavbarLink({
   return (
     <NextLink
       href={href}
-      className="font-robotoMono px-0 text-center text-base font-normal text-white no-underline"
+      className="px-0 text-center font-normal font-robotoMono text-base text-white no-underline"
       target={target}
       aria-label={ariaLabel}
     >
@@ -31,13 +38,18 @@ export function NavbarLink({
 export function NavbarTitle() {
   return (
     <div className="flex h-8 items-center justify-start gap-4">
-      <NextLink href="/" passHref className="relative h-8 w-8" aria-label="Home page">
+      <NextLink
+        href="/"
+        passHref={true}
+        className="relative h-8 w-8"
+        aria-label="Home page"
+      >
         <div className="absolute size-8 rounded-full bg-white" />
       </NextLink>
       <NextLink
         href="/"
-        passHref
-        className="font-robotoMono text-center text-xl font-medium text-white no-underline"
+        passHref={true}
+        className="text-center font-medium font-robotoMono text-white text-xl no-underline"
         aria-label="build-onchain-apps Github repository"
       >
         BUILD ONCHAIN APPS
@@ -59,7 +71,10 @@ function Navbar() {
         <div className="flex items-center justify-start gap-8">
           <ul className="hidden items-center justify-start gap-8 md:flex">
             <li className="flex">
-              <NavbarLink href="https://github.com/coinbase/build-onchain-apps" target="_blank">
+              <NavbarLink
+                href="https://github.com/coinbase/build-onchain-apps"
+                target="_blank"
+              >
                 <GitHubLogoIcon
                   width="24"
                   height="24"
@@ -71,11 +86,11 @@ function Navbar() {
               <NavbarLink href="/#get-started">Get Started</NavbarLink>
             </li>
             <li className="flex">
-              <NavigationMenu.Root className="relative">
-                <NavigationMenu.List className={clsx('flex flex-row space-x-2')}>
-                  <NavigationMenu.Item>
-                    <NavigationMenu.Trigger className="group flex h-16 items-center justify-start gap-1">
-                      <span className="font-robotoMono text-center text-base font-normal text-white">
+              <Root className="relative">
+                <List className={clsx('flex flex-row space-x-2')}>
+                  <Item>
+                    <Trigger className="group flex h-16 items-center justify-start gap-1">
+                      <span className="text-center font-normal font-robotoMono text-base text-white">
                         Experiences
                       </span>
                       <ChevronDownIcon
@@ -83,24 +98,24 @@ function Navbar() {
                         width="16"
                         height="16"
                       />
-                    </NavigationMenu.Trigger>
-                    <NavigationMenu.Content
+                    </Trigger>
+                    <Content
                       className={clsx(
-                        'h-38 inline-flex w-48 flex-col items-start justify-start gap-6',
+                        'inline-flex h-38 w-48 flex-col items-start justify-start gap-6',
                         'rounded-lg bg-neutral-900 p-6 shadow backdrop-blur-2xl',
                       )}
                     >
                       <Experiences />
-                    </NavigationMenu.Content>
-                  </NavigationMenu.Item>
-                </NavigationMenu.List>
-                <NavigationMenu.Viewport
+                    </Content>
+                  </Item>
+                </List>
+                <Viewport
                   className={clsx(
                     'absolute flex justify-center',
-                    'left-[-20%] top-[100%] w-[140%]',
+                    'top-[100%] left-[-20%] w-[140%]',
                   )}
                 />
-              </NavigationMenu.Root>
+              </Root>
             </li>
           </ul>
           <AccountConnect />

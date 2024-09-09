@@ -6,7 +6,10 @@ export type JsonMetadata = {
   image: string | undefined;
 };
 
-function tryParseMetadataJson(str: string, gatewayHostname?: string): JsonMetadata | undefined {
+function tryParseMetadataJson(
+  str: string,
+  gatewayHostname?: string,
+): JsonMetadata | undefined {
   try {
     const json = JSON.parse(str) as JsonMetadata;
     return {
@@ -39,16 +42,15 @@ export const getCollectionMetadataAction = async ({
   const jsonParsedMetadata = tryParseMetadataJson(metadataURI, gatewayHostname);
   if (jsonParsedMetadata) {
     return jsonParsedMetadata;
-  } else {
-    const response = await fetch(ipfsToHTTP(metadataURI, gatewayHostname));
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
-    }
-    const json = (await response.json()) as JsonMetadata;
-    return {
-      name: json.name,
-      description: json.description,
-      image: ipfsToHTTP(json.image ?? '', gatewayHostname),
-    };
   }
+  const response = await fetch(ipfsToHTTP(metadataURI, gatewayHostname));
+  if (!response.ok) {
+    throw new Error(`Error: ${response.status}`);
+  }
+  const json = (await response.json()) as JsonMetadata;
+  return {
+    name: json.name,
+    description: json.description,
+    image: ipfsToHTTP(json.image ?? '', gatewayHostname),
+  };
 };

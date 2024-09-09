@@ -3,7 +3,10 @@ import isClient from './isClient';
 // TODO ~~~~
 let perfumeLib: {
   initPerfume: (arg0: {
-    analyticsTracker: ({ metricName, data }: { metricName: unknown; data: unknown }) => void;
+    analyticsTracker: ({
+      metricName,
+      data,
+    }: { metricName: unknown; data: unknown }) => void;
   }) => unknown;
   end: (stepName: string) => unknown;
   start: (stepName: string) => unknown;
@@ -25,7 +28,7 @@ function initWebVitals() {
   });
 }
 
-export const initAnalytics = function () {
+export const initAnalytics = () => {
   if (isClient()) {
     try {
       initWebVitals();
@@ -37,9 +40,9 @@ export const initAnalytics = function () {
   }
 };
 
-export const markStep = function (stepName: string) {
+export const markStep = (stepName: string) => {
   if (isClient() && perfumeLib && perfumeLib.markStep) {
-    perfumeLib.end('perf.' + stepName);
-    perfumeLib.start('perf.' + stepName);
+    perfumeLib.end(`perf.${stepName}`);
+    perfumeLib.start(`perf.${stepName}`);
   }
 };

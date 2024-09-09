@@ -1,6 +1,6 @@
-import { useCallback } from 'react';
 import { Address, Avatar, Name } from '@coinbase/onchainkit/identity';
 import { ExitIcon } from '@radix-ui/react-icons';
+import { useCallback } from 'react';
 import { useAccount, useDisconnect } from 'wagmi';
 
 export function AccountInfoPanel() {
@@ -10,17 +10,19 @@ export function AccountInfoPanel() {
     disconnect();
   }, [disconnect]);
 
-  if (!address) return null;
+  if (!address) {
+    return null;
+  }
 
   return (
     <>
       <div className="mb-4 inline-flex items-center justify-start gap-2">
         <Avatar address={address} className="h-10 w-10 rounded-full" />
         <div className="inline-flex flex-col items-start justify-center gap-1">
-          <div className="font-inter w-32 text-base font-medium text-white">
+          <div className="w-32 font-inter font-medium text-base text-white">
             <Name address={address} />
           </div>
-          <span className="font-inter w-32 text-sm font-medium text-zinc-400">
+          <span className="w-32 font-inter font-medium text-sm text-zinc-400">
             <Address address={address} />
           </span>
         </div>
@@ -32,7 +34,9 @@ export function AccountInfoPanel() {
         className="my-4 inline-flex items-center justify-between self-stretch"
         onClick={handleDisconnectWallet}
       >
-        <span className="font-inter w-32 text-left text-base font-medium text-white">Log out</span>
+        <span className="w-32 text-left font-inter font-medium text-base text-white">
+          Log out
+        </span>
         <ExitIcon className="relative h-4 w-4" />
       </button>
     </>
